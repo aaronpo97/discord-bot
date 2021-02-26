@@ -1,8 +1,8 @@
 const Commando = require('discord.js-commando');
 const validUnits = ['C', 'F'];
 
-const celToFar = c => (c * 9) / 5 + 32;
-const farToCel = f => ((f - 32) * 5) / 9;
+const celToFar = c => c * (9 / 5) + 32;
+const farToCel = f => (f - 32) * (5 / 9);
 
 module.exports = class TemperatureConvertCommand extends Commando.Command {
 	constructor(client) {
