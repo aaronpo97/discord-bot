@@ -22,12 +22,10 @@ client.on('ready', async () => {
 
 	console.log(`${client.user.tag} is now live.`);
 	console.log(`Now connected to: \n`);
-	client.guilds.cache.forEach(guild => console.log(guild.name));
+	client.guilds.cache.forEach((guild) => console.log(guild.name));
 	console.log(`\nStatus set to ${status == 'online' ? status.green : status.red}.`);
 });
 
-client.on('message', message => {
-	automod(message);
-});
+client.on('message', (message) => automod(message));
 
 client.login(process.env.BOT_TOKEN);

@@ -1,6 +1,7 @@
 const Commando = require('discord.js-commando');
 const axios = require('axios');
-const Discord = require('discord.js');
+const fetch = require('node-fetch');
+
 const { supportedCurrencies, helpEmbed1, helpEmbed2, chooseExchangeRate } = require('./utils/currencyconvert');
 module.exports = class CurrencyConvertCommand extends Commando.Command {
 	constructor(client) {
@@ -29,9 +30,10 @@ module.exports = class CurrencyConvertCommand extends Commando.Command {
 		if (!(supportedCurrencies.includes(baseCurrency) && supportedCurrencies.includes(convertedCurrency))) {
 			return message.channel.send('Error, invalid currency type.');
 		}
-		const res = await axios.get(`https://api.exchangeratesapi.io/latest?base=${baseCurrency}`);
-		const { rates } = res.data;
-		const exchangeRate = chooseExchangeRate(rates, convertedCurrency);
+
+		const res = await fetch(`https://api.exchangeratesapi.io/latest?base=${baseCurrency}`);
+		const data = await res.json();
+		const exchangeRate = chooseExchangeRate(data, convertedCurrency);
 		const convertedValue = initialValue * exchangeRate;
 		message.channel.send(`${initialValue.toFixed(2)} ${baseCurrency} = ${convertedValue.toFixed(2)} ${convertedCurrency}`);
 	}

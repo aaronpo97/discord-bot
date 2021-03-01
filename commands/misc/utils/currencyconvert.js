@@ -82,7 +82,7 @@ module.exports.helpEmbed2 = new Discord.MessageEmbed()
 		{ name: 'ZAR', value: 'Rand' }
 	);
 
-module.exports.chooseExchangeRate = (rates, convertedCurrency) => {
+module.exports.chooseExchangeRate = ({ rates }, convertedCurrency) => {
 	switch (convertedCurrency) {
 		case 'CAD':
 			return rates.CAD;

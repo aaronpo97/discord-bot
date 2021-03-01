@@ -10,3 +10,4 @@ BOT_PREFIX=[Whatever prefix you want.]
 BOT_TOKEN=[Your bot token. Keep this secret!]
 SUPPORT_CHANNEL_ID=[The channel id for moderation messages.]
 ```
+

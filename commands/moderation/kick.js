@@ -18,10 +18,9 @@ module.exports = class KickCommand extends Commando.Command {
 		if (!target) return message.reply('Please specify someone to kick.');
 		const member = message.guild.members.cache.get(target.id);
 		if (!member.kickable) {
-			message.reply('I cannot kick that user.');
-		} else {
-			member.kick(reason);
-			await message.reply('That user has been kicked.');
+			return message.reply('I cannot kick that user.');
 		}
+		member.kick(reason);
+		await message.reply('That user has been kicked.');
 	}
 };
