@@ -2,6 +2,10 @@
 
 # How to use:
 
+## Step 1: Create an application using Discord's Developer Portal.
+
+https://discord.com/developers/applications
+
 ## Step 2: Create a `.env` file to store the following bot information:
 
 ```env
@@ -10,4 +14,3 @@ BOT_PREFIX=[Whatever prefix you want.]
 BOT_TOKEN=[Your bot token. Keep this secret!]
 SUPPORT_CHANNEL_ID=[The channel id for moderation messages.]
 ```
-

@@ -1,9 +1,18 @@
 const Commando = require('discord.js-commando');
 const dotenv = require('dotenv').config();
-const supportChannelID = process.env.SUPPORT_CHANNEL_ID;
 const Discord = require('discord.js');
 
-module.exports = class BanCommand extends Commando.Command {
+const ServerInfo = require('../../schemas/ServerInfo');
+const getSupportChannelID = async serverID => {
+	try {
+		const currentServer = await ServerInfo.findOne({ guildID: serverID });
+		return currentServer.supportChannelID;
+	} catch {
+		return null;
+	}
+};
+
+module.exports = class SupportCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'support',
@@ -14,6 +23,10 @@ module.exports = class BanCommand extends Commando.Command {
 		});
 	}
 	async run(message, args) {
+		const serverID = message.guild.id;
+		const supportChannelID = await getSupportChannelID(serverID);
+		console.log(supportChannelID);
+
 		if (!supportChannelID) {
 			message.react('❌');
 			await message.channel.send(
@@ -21,7 +34,9 @@ module.exports = class BanCommand extends Commando.Command {
 			);
 			return;
 		}
-		const supportChannel = this.client.channels.cache.find((channel) => channel.id === supportChannelID);
+		const supportChannel = this.client.channels.cache.find(channel => channel.id === supportChannelID);
+		console.log(supportChannel);
+
 		const reason = args.join(' ');
 		if (!reason) {
 			message.react('❌');

@@ -15,10 +15,14 @@ module.exports = class KickCommand extends Commando.Command {
 	async run(message, args) {
 		const target = message.mentions.users.first();
 		const reason = args.slice(1).join(' ');
-		if (!target) return message.reply('Please specify someone to kick.');
+		if (!target) {
+			message.reply('Please specify someone to kick.');
+			return;
+		}
 		const member = message.guild.members.cache.get(target.id);
 		if (!member.kickable) {
-			return message.reply('I cannot kick that user.');
+			message.reply('I cannot kick that user.');
+			return;
 		}
 		member.kick(reason);
 		await message.reply('That user has been kicked.');
