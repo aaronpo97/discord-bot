@@ -10,6 +10,7 @@ module.exports = class KickCommand extends Commando.Command {
 			clientPermissions: ['KICK_MEMBERS'],
 			userPermissions: ['KICK_MEMBERS'],
 			argsType: 'multiple',
+			guildOnly: true,
 		});
 	}
 	async run(message, args) {

@@ -10,7 +10,7 @@ module.exports = class TemperatureConvertCommand extends Commando.Command {
 			name: 'temperature-convert',
 			group: 'misc',
 			memberName: 'temp-convert',
-			aliases: ['tempconvert', 'temp-convert'],
+			aliases: ['tempconvert', 'temp-convert', 'tc', 'ct', 'convert-temperature', 'converttemp', 'c-temp'],
 			description: 'Convert temperatures.',
 			argsType: 'multiple',
 		});

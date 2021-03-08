@@ -10,6 +10,7 @@ module.exports = class BanCommand extends Commando.Command {
 			clientPermissions: ['BAN_MEMBERS'],
 			userPermissions: ['BAN_MEMBERS'],
 			argsType: 'multiple',
+			guildOnly: true,
 		});
 	}
 	async run(message, args) {

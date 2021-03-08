@@ -1,12 +1,12 @@
 const badWords = require('./bannedWords.js');
 
-const findBannedWords = (message) => {
+const findBannedWords = message => {
 	for (i = 0; i < badWords.length; i++) {
 		if (message.content.toLowerCase().includes(badWords[i].toLowerCase())) return true;
 	}
 };
 
-const automod = async (message) => {
+const automod = async message => {
 	try {
 		const foundWord = findBannedWords(message);
 		if (foundWord) {
