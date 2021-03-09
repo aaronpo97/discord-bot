@@ -15,7 +15,6 @@ module.exports = class CurrencyConvertCommand extends Commando.Command {
 		});
 	}
 	async run(message, args) {
-		console.log(process.env.BOT_PREFIX);
 		try {
 			if (!args.length || args[0].toUpperCase() === 'HELP') {
 				message.channel.send('Help: To use command type `b!currency-convert [amount] [base currency] [target currency]`.');

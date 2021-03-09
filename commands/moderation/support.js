@@ -25,17 +25,15 @@ module.exports = class SupportCommand extends Commando.Command {
 	async run(message, args) {
 		const serverID = message.guild.id;
 		const supportChannelID = await getSupportChannelID(serverID);
-		console.log(supportChannelID);
 
 		if (!supportChannelID) {
 			message.react('❌');
 			await message.channel.send(
-				'The bot owner/server administrator needs to indicate a support channel id. This command is unavailable until then.'
+				'The server administrator needs to indicate a support channel id. This command is unavailable until then.'
 			);
 			return;
 		}
 		const supportChannel = this.client.channels.cache.find(channel => channel.id === supportChannelID);
-		console.log(supportChannel);
 
 		const reason = args.join(' ');
 		if (!reason) {
@@ -44,19 +42,20 @@ module.exports = class SupportCommand extends Commando.Command {
 			return;
 		}
 		const replyEmbed = new Discord.MessageEmbed()
-			.setColor('#0099ff')
 			.setTitle('Requesting mod help.')
 			.addFields({ name: 'Reason', value: reason });
 		message.react('✅');
 		await message.channel.send(replyEmbed);
 
 		const helpEmbed = new Discord.MessageEmbed()
-			.setColor('#0099ff')
 			.setTitle('Mod Help')
 			.addFields(
 				{ name: 'Requested by', value: `${message.author} in ${message.channel}`, inline: true },
 				{ name: 'Reason', value: reason, inline: true },
-				{ name: 'Message URL', value: `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}` }
+				{
+					name: 'Message URL',
+					value: `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`,
+				}
 			)
 			.setTimestamp()
 			.setFooter('Mod Help Ticket');
