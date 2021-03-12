@@ -1,3 +1,22 @@
+/*      
+	DiscordBot
+   Copyright (C) 2021 Aaron Po
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+
 require('dotenv').config();
 require('colors');
 
@@ -25,9 +44,15 @@ client.on('ready', () => {
 	let status = process.argv[2];
 	if (!validStatusType.includes(status)) status = 'online';
 	client.user.setStatus(status);
-	console.log(`${client.user.tag.blue} is now live.`);
+	console.log(`${client.user.tag.blue} is now live. \n`);
 
-	console.log(`Now connected to: \n`);
+	console.log('Copyright (C) 2021 Aaron Po');
+	console.log('This program comes with ABSOLUTELY NO WARRANTY.');
+	console.log('This is free software, and you are welcome to redistribute it under certain conditions.');
+
+	console.log(`Visit ${`https://github.com/aaronpo97/discord-bot`.yellow} to learn more.`);
+
+	console.log(`\nNow connected to: \n`);
 	client.guilds.cache.forEach(guild => console.log(guild.name));
 
 	console.log(`\nStatus set to ${status == 'online' ? status.green : status.red}.`);
