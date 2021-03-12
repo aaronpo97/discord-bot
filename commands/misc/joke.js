@@ -12,8 +12,16 @@ module.exports = class JokeCommand extends Commando.Command {
 		});
 	}
 	async run(message, args) {
-		const res = await fetch('https://icanhazdadjoke.com', { headers: { Accept: 'application/json' } });
-		const { joke } = await res.json();
-		message.channel.send(joke);
+		try {
+			const res = await fetch('https://icanhazdadjoke.com', { headers: { Accept: 'application/json' } });
+			const { joke } = await res.json();
+			message.channel.send(joke);
+		} catch (error) {
+			if (error.name === 'FetchError') {
+				message.channel.send(`Sorry, something went wrong on our end.`);
+				return;
+			}
+			message.channel.send(`Sorry, something went wrong.`);
+		}
 	}
 };

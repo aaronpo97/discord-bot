@@ -12,9 +12,7 @@ const createImageEmbed = message => {
 
 	return new Discord.MessageEmbed()
 		.setTitle(taggedUser ? `${taggedUser.tag}'s Avatar!` : `Your avatar:`)
-		.setImage(
-			taggedUser ? taggedUser.displayAvatarURL(imageConfig) : author.displayAvatarURL(imageConfig)
-		);
+		.setImage(taggedUser ? taggedUser.displayAvatarURL(imageConfig) : author.displayAvatarURL(imageConfig));
 };
 
 module.exports = class AvatarCommand extends Commando.Command {

@@ -17,16 +17,19 @@ module.exports = class CurrencyConvertCommand extends Commando.Command {
 	async run(message, args) {
 		try {
 			if (!args.length || args[0].toUpperCase() === 'HELP') {
-				message.channel.send('Help: To use command type `b!currency-convert [amount] [base currency] [target currency]`.');
-				await message.channel.send(helpEmbed1);
-				await message.channel.send(helpEmbed2);
+				message.channel.send(
+					`Help: To use command type \`${process.env.BOT_PREFIX} currency-convert [amount] [base currency] [target currency]\`.`
+				);
+				// await message.channel.send(helpEmbed1);
+				// await message.channel.send(helpEmbed2);
+				// todo  fix the help section so that the embeds only show when the user wants them
 				return;
 			}
 			const initialValue = parseFloat(args[0]);
 			const baseCurrency = args[1].toUpperCase();
 			const convertedCurrency = args[2].toUpperCase();
 			if (!(initialValue || initialValue === 0)) {
-				message.channel.send(`Error, invalid amount. Use command \` `);
+				message.channel.send(`Error, invalid amount. Use command ${process.env.BOT_PREFIX}currency-convert help to get assistance.`);
 				return;
 			}
 			if (!(supportedCurrencies.includes(baseCurrency) && supportedCurrencies.includes(convertedCurrency))) {
@@ -40,7 +43,15 @@ module.exports = class CurrencyConvertCommand extends Commando.Command {
 			const convertedValue = initialValue * exchangeRate;
 			message.channel.send(`${initialValue.toFixed(2)} ${baseCurrency} = ${convertedValue.toFixed(2)} ${convertedCurrency}`);
 		} catch (error) {
-			console.log(error);
+			if (error.name === 'TypeError') {
+				message.channel.send(`Invalid command usage. Use command ${process.env.BOT_PREFIX}currency-convert help to get assistance.`);
+				return;
+			}
+			if (error.name === 'FetchError') {
+				message.channel.send(`Sorry, something went wrong on our end.`);
+				return;
+			}
+			message.channel.send(`Something went wrong: ${error}`);
 		}
 	}
 };

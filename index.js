@@ -7,6 +7,7 @@ const client = new Commando.CommandoClient({
 	owner: process.env.BOT_OWNER,
 	commandPrefix: process.env.BOT_PREFIX,
 });
+
 const automod = require('./automod');
 const mongoose = require('mongoose');
 
@@ -20,14 +21,15 @@ client.on('ready', () => {
 		.registerCommandsIn(path.join(__dirname, 'commands'));
 
 	const validStatusType = ['online', 'invisible', 'dnd', 'idle'];
+
 	let status = process.argv[2];
 	if (!validStatusType.includes(status)) status = 'online';
 	client.user.setStatus(status);
-
 	console.log(`${client.user.tag.blue} is now live.`);
 
 	console.log(`Now connected to: \n`);
 	client.guilds.cache.forEach(guild => console.log(guild.name));
+
 	console.log(`\nStatus set to ${status == 'online' ? status.green : status.red}.`);
 
 	mongoose
@@ -42,5 +44,11 @@ client.on('ready', () => {
 });
 
 client.on('message', message => automod(message));
+
+// client.on('error', () => {
+// 	console.log('Could not connect to the Discord API.');
+// });
+
+// TODO deal with error handling for when the bot cannot connect to the discord api, the client.on("error") does not seem to work
 
 client.login(process.env.BOT_TOKEN);
