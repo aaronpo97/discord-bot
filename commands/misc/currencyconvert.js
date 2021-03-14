@@ -3,6 +3,7 @@ require('dotenv').config();
 const fetch = require('node-fetch');
 
 const { supportedCurrencies, helpEmbed1, helpEmbed2 } = require('./utils/currencyconvert');
+
 module.exports = class CurrencyConvertCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
@@ -10,8 +11,12 @@ module.exports = class CurrencyConvertCommand extends Commando.Command {
 			group: 'misc',
 			memberName: 'currency-convert',
 			aliases: ['currencyconvert', 'convertcurrency', 'convertcurrencies', 'convert-currency', 'cc', 'c-c'],
-			description: 'Convert currencies.',
+			description: 'Convert money to a different currency.',
 			argsType: 'multiple',
+			examples: [
+				`${process.env.BOT_PREFIX}currency-convert 100 usd cad`,
+				`${process.env.BOT_PREFIX}currency-convert 120 brl eur`,
+			],
 		});
 	}
 	async run(message, args) {
@@ -29,7 +34,9 @@ module.exports = class CurrencyConvertCommand extends Commando.Command {
 			const baseCurrency = args[1].toUpperCase();
 			const convertedCurrency = args[2].toUpperCase();
 			if (!(initialValue || initialValue === 0)) {
-				message.channel.send(`Error, invalid amount. Use command ${process.env.BOT_PREFIX}currency-convert help to get assistance.`);
+				message.channel.send(
+					`Error, invalid amount. Use command ${process.env.BOT_PREFIX}currency-convert help to get assistance.`
+				);
 				return;
 			}
 			if (!(supportedCurrencies.includes(baseCurrency) && supportedCurrencies.includes(convertedCurrency))) {
@@ -41,10 +48,14 @@ module.exports = class CurrencyConvertCommand extends Commando.Command {
 			const data = await res.json();
 			const exchangeRate = data.rates[convertedCurrency];
 			const convertedValue = initialValue * exchangeRate;
-			message.channel.send(`${initialValue.toFixed(2)} ${baseCurrency} = ${convertedValue.toFixed(2)} ${convertedCurrency}`);
+			message.channel.send(
+				`${initialValue.toFixed(2)} ${baseCurrency} = ${convertedValue.toFixed(2)} ${convertedCurrency}`
+			);
 		} catch (error) {
 			if (error.name === 'TypeError') {
-				message.channel.send(`Invalid command usage. Use command ${process.env.BOT_PREFIX}currency-convert help to get assistance.`);
+				message.channel.send(
+					`Invalid command usage. Use command ${process.env.BOT_PREFIX}currency-convert help to get assistance.`
+				);
 				return;
 			}
 			if (error.name === 'FetchError') {

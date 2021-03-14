@@ -15,15 +15,7 @@ module.exports = class TemperatureConvertCommand extends Commando.Command {
 			name: 'temp-convert',
 			group: 'misc',
 			memberName: 'temp-convert',
-			aliases: [
-				'tempconvert',
-				'temp-convert',
-				'tc',
-				'ct',
-				'convert-temperature',
-				'converttemp',
-				'c-temp',
-			],
+			aliases: ['tempconvert', 'temp-convert', 'tc', 'ct', 'convert-temperature', 'converttemp', 'c-temp'],
 			description: 'Convert temperatures.',
 			argsType: 'multiple',
 		});
@@ -70,9 +62,9 @@ module.exports = class TemperatureConvertCommand extends Commando.Command {
 
 		if (initialUnit === convertedUnit) {
 			message.channel.send(
-				`${initialTemp}${checkIfUsesDegree(
+				`${initialTemp}${checkIfUsesDegree(initialUnit)} ${initialUnit} is ${initialTemp}${checkIfUsesDegree(
 					initialUnit
-				)} ${initialUnit} is ${initialTemp}${checkIfUsesDegree(initialUnit)} ${initialUnit}.`
+				)} ${initialUnit}.`
 			);
 			await message.channel.send(`Did you really need me to tell you that? You're a nitwit.`);
 			return;

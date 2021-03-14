@@ -16,7 +16,6 @@ module.exports = class BanCommand extends Commando.Command {
 	async run(message, args) {
 		const target = message.mentions.users.first();
 		const reason = args.slice(1).join(' ');
-		console.log(reason);
 		if (!target) {
 			return message.reply('Please specify someone to ban.');
 		}

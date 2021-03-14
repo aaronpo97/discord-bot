@@ -1,5 +1,5 @@
 const Commando = require('discord.js-commando');
-const ServerInfo = require('../../schemas/ServerInfo');
+const ServerInfo = require('../../database/schemas/ServerInfo');
 
 const { initSupportChannel, updateSupportChannel } = require('./controllers/support-init');
 
@@ -19,8 +19,8 @@ module.exports = class InitSupportCommand extends Commando.Command {
 	}
 	async run(message, args) {
 		const serverInfo = await ServerInfo.findOne({ guildID: message.guild.id });
-
-		if (!serverInfo) {
+		const { supportChannelID } = serverInfo;
+		if (!supportChannelID) {
 			initSupportChannel(message);
 		} else {
 			updateSupportChannel(message, serverInfo);

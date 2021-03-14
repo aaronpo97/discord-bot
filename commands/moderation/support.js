@@ -2,7 +2,7 @@ const Commando = require('discord.js-commando');
 const dotenv = require('dotenv').config();
 const Discord = require('discord.js');
 
-const ServerInfo = require('../../schemas/ServerInfo');
+const ServerInfo = require('../../database/schemas/ServerInfo');
 const getSupportChannelID = async serverID => {
 	try {
 		const currentServer = await ServerInfo.findOne({ guildID: serverID });

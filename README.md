@@ -1,4 +1,4 @@
-## This is a general purpose Discord bot developed by Aaron Po.
+## YerbBot is a general purpose Discord bot developed by Aaron Po.
 
 # How to use:
 

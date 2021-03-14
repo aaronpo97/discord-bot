@@ -6,7 +6,7 @@ module.exports = class StatusCommand extends Commando.Command {
 			group: 'moderation',
 			memberName: 'status',
 			description: 'Changes the status update of the bot.',
-			userPermissions: ['MANAGE_MESSAGES'],
+			userPermissions: ['ADMINISTRATOR'],
 			argsType: 'multiple',
 		});
 	}
@@ -14,8 +14,12 @@ module.exports = class StatusCommand extends Commando.Command {
 		if (!args.length) {
 			message.react('❌');
 			await message.channel.send('You did not provide any arguments.');
-			await message.channel.send('Be sure to include both the status message and type. To reset status add `RESET` as your first argument.');
-			await message.channel.send('Valid status types: `WATCHING`, `PLAYING`, `LISTENING`, or `STREAMING`');
+			await message.channel.send(
+				'Be sure to include both the status message and type. To reset status add `RESET` as your first argument.'
+			);
+			await message.channel.send(
+				'Valid status types: `WATCHING`, `PLAYING`, `LISTENING`, or `STREAMING`'
+			);
 			return;
 		}
 		const statusMessageType = args.shift().toUpperCase();
@@ -28,12 +32,16 @@ module.exports = class StatusCommand extends Commando.Command {
 		}
 		if (!validStatusMessageType.includes(statusMessageType)) {
 			message.react('❌');
-			await message.channel.send('Invalid usage. Please use a valid status type (`WATCHING`, `PLAYING`, `LISTENING`, or `STREAMING`)');
+			await message.channel.send(
+				'Invalid usage. Please use a valid status type (`WATCHING`, `PLAYING`, `LISTENING`, or `STREAMING`)'
+			);
 			return;
 		}
 		if (!statusMessage) {
 			message.react('❌');
-			await message.channel.send('Invalid usage. You have to include a status message.');
+			await message.channel.send(
+				'Invalid usage. You have to include a status message.'
+			);
 			return;
 		}
 		this.client.user.setActivity(statusMessage, { type: statusMessageType });
