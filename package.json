@@ -13,7 +13,8 @@
 		"discord.js-commando": "git+https://github.com/discordjs/commando.git",
 		"dotenv": "^8.2.0",
 		"mongoose": "^5.12.0",
-		"node-fetch": "^2.6.1"
+		"node-fetch": "^2.6.1",
+		"pretty-ms": "^7.0.1"
 	},
 	"repository": {
 		"type": "git",

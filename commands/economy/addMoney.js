@@ -23,7 +23,7 @@ module.exports = class AddMoneyCommand extends Commando.Command {
 
 		const userAccount = await Account.findOne({ userID, guild: currentGuild._id }).populate('guild');
 		if (!userAccount) {
-			message.channel.send('Your in-server economy account is not initialized');
+			message.channel.send('Your in-server economy account is not initialized.');
 			return;
 		}
 
@@ -31,6 +31,6 @@ module.exports = class AddMoneyCommand extends Commando.Command {
 		const amountToAdd = Math.floor(Math.random() * 100 + 1);
 		userAccount.balance += amountToAdd;
 		await userAccount.save();
-		await message.channel.send(`You received ${amountToAdd} units. Your balance is now ${userAccount.balance}.`);
+		await message.channel.send(`You received ${amountToAdd} units. Your balance is now ${userAccount.balance} units.`);
 	}
 };

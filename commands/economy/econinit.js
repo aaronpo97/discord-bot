@@ -17,7 +17,10 @@ module.exports = class EconInitCommand extends Commando.Command {
 
 		const currentGuild = await ServerInfo.findOne({ guildID });
 
-		if (!currentGuild) return message.channel.send('sadge');
+		if (!currentGuild)
+			return message.channel.send(
+				'Your guild is not registered with the database. Please contact the server owner or administrator.'
+			);
 
 		const findUserAccount = await Account.findOne({ userID, guild: currentGuild._id });
 		if (findUserAccount) {
@@ -25,11 +28,12 @@ module.exports = class EconInitCommand extends Commando.Command {
 			return;
 		}
 
-		const userAccount = new Account({ userID, balance: 40 });
+		const balance = 40;
+		const userAccount = new Account({ userID, balance });
 		userAccount.guild = currentGuild;
 
 		await userAccount.save();
 
-		message.channel.send(`Your in-server economy account has been made. Here is your information: ${userAccount}`);
+		message.channel.send(`Your in-server economy account has been made. Your starting balance is ${balance}.`);
 	}
 };
