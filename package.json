@@ -4,10 +4,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "nodemon .",
-		"start": "node .",
-		"start dnd": "node . dnd",
-		"start invisible": "node . invisible",
-		"start idle": "node . idle"
+		"start": "node ."
 	},
 	"author": "Aaron William Po",
 	"dependencies": {

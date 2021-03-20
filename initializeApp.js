@@ -7,9 +7,10 @@ module.exports = async client => {
 	try {
 		client.registry
 			.registerGroups([
-				['moderation', 'mod commands'],
-				['misc', 'misc commands'],
+				['moderation', 'Moderation commands.'],
+				['misc', 'Miscellaneous commands.'],
 				['utility', 'Utility commands.'],
+				['economy', 'In server economy commands.'],
 			])
 			.registerDefaults()
 			.registerCommandsIn(path.join(__dirname, 'commands'));
@@ -27,7 +28,7 @@ module.exports = async client => {
 
 		console.log('MongoDB connection established. \n');
 
-		console.log(`${client.user.tag.red} is now live. \n`);
+		console.log(`${client.user.tag.yellow} is now live. \n`);
 		console.log(`Now connected to:`);
 		client.guilds.cache.forEach(guild => console.log(guild.name));
 		console.log(`\nStatus set to ${status == 'online' ? status.green : status.red}.`);
