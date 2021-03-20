@@ -8,7 +8,7 @@ const registerGuild = async guild => {
 		supportChannelID: null,
 	});
 	await addedServer.save();
-	console.log(addedServer);
+	return addedServer;
 };
 
 module.exports = registerGuild;

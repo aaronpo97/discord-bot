@@ -9,6 +9,7 @@ module.exports = async client => {
 			.registerGroups([
 				['moderation', 'mod commands'],
 				['misc', 'misc commands'],
+				['utility', 'Utility commands.'],
 			])
 			.registerDefaults()
 			.registerCommandsIn(path.join(__dirname, 'commands'));
@@ -31,6 +32,6 @@ module.exports = async client => {
 		client.guilds.cache.forEach(guild => console.log(guild.name));
 		console.log(`\nStatus set to ${status == 'online' ? status.green : status.red}.`);
 	} catch (error) {
-		console.log('Something went wrong: ' + error);
+		console.log('Something went wrong: ' + error.stack);
 	}
 };

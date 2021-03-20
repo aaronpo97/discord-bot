@@ -3,8 +3,11 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon index.js"
+		"dev": "nodemon .",
+		"start": "node .",
+		"start dnd": "node . dnd",
+		"start invisible": "node . invisible",
+		"start idle": "node . idle"
 	},
 	"author": "Aaron William Po",
 	"dependencies": {
