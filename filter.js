@@ -6,7 +6,7 @@ module.exports = async message => {
 		if (message.content !== filter) {
 			setTimeout(() => message.delete(), 100);
 			const reply = await message.channel.send(`In this channel you are only allowed to say the word: '${filter}'`);
-			setTimeout(() => reply.delete(), 6000);
+			setTimeout(() => reply.delete(), 600);
 		}
 	} catch (err) {
 		console.error(err);

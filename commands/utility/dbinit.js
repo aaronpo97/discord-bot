@@ -21,7 +21,8 @@ module.exports = class InitSupportCommand extends Commando.Command {
 			return;
 		}
 		const addedServer = await registerGuild(message.guild);
-		message.channel.send(`Your server is now registered in the database with the following information:`);
+
+		message.channel.send(`Your server is now registered in the database.`);
 		console.log(addedServer);
 	}
 };
