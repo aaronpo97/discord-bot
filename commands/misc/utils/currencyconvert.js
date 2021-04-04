@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-module.exports.supportedCurrencies = [
+const supportedCurrencies = [
 	'AUD',
 	'BGN',
 	'BRL',
@@ -35,7 +35,7 @@ module.exports.supportedCurrencies = [
 	'ZAR',
 ];
 
-module.exports.helpEmbed1 = new Discord.MessageEmbed()
+const helpEmbed1 = new Discord.MessageEmbed()
 	.setColor('#000000')
 	.setTitle('Supported currencies:')
 	.setDescription('ISO Currency Codes:')
@@ -55,7 +55,7 @@ module.exports.helpEmbed1 = new Discord.MessageEmbed()
 		{ name: 'HUF', value: 'Hungarian Forint' }
 	);
 
-module.exports.helpEmbed2 = new Discord.MessageEmbed()
+const helpEmbed2 = new Discord.MessageEmbed()
 	.setColor('#000000')
 	.setTitle('Supported currencies:')
 	.setDescription('ISO Currency Codes:')
@@ -81,3 +81,5 @@ module.exports.helpEmbed2 = new Discord.MessageEmbed()
 		{ name: 'USD', value: 'US Dollar' },
 		{ name: 'ZAR', value: 'Rand' }
 	);
+
+module.exports = { supportedCurrencies, helpEmbed1, helpEmbed2 };
