@@ -8,7 +8,7 @@
    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of 
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
 */
 
 require('dotenv').config();
@@ -20,19 +20,15 @@ const client = new Commando.CommandoClient({
 });
 
 const initializeApp = require('./initializeApp');
-
 const automod = require('./automod');
+const checkDeletedChannel = require('./database/utils/checkDeletedChannel');
 const registerGuild = require('./database/utils/registerGuild');
 const unregisterGuild = require('./database/utils/unregisterGuild');
-const checkDeletedChannel = require('./database/utils/checkDeletedChannel');
-const filter = require('./filter');
 
 client.on('ready', () => initializeApp(client));
 client.on('message', message => automod(message));
 client.on('channelDelete', channel => checkDeletedChannel(channel));
 client.on('guildCreate', guild => registerGuild(guild));
 client.on('guildDelete', guild => unregisterGuild(guild));
-
-client.on('message', message => filter(message));
 
 client.login(process.env.BOT_TOKEN);
