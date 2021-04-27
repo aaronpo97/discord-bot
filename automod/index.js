@@ -8,12 +8,11 @@ const findBannedWords = message => {
 
 const automod = async message => {
 	try {
-		const foundWord = findBannedWords(message);
-		if (foundWord) {
+		if (findBannedWords(message)) {
 			const reason = 'Zero tolerance for racial slurs.';
 			const target = message.author;
 			const member = message.guild.members.cache.get(target.id);
-			message.delete();
+			await message.delete();
 			if (!member.bannable) {
 				await message.channel.send(`There is zero tolerance for discrimination and verbal slurs.`);
 			} else {
@@ -22,7 +21,7 @@ const automod = async message => {
 			}
 		}
 	} catch (error) {
-		console.log('oops');
+		console.log(`Something went wrong:`, error);
 	}
 };
 

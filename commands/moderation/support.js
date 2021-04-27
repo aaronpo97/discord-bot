@@ -20,6 +20,7 @@ module.exports = class SupportCommand extends Commando.Command {
 			memberName: 'support',
 			description: 'Create a ticket for mod support.',
 			argsType: 'multiple',
+			guildOnly: true,
 		});
 	}
 	async run(message, args) {
@@ -41,9 +42,7 @@ module.exports = class SupportCommand extends Commando.Command {
 			await message.channel.send(`You didn't provide a reason for your support ticket.`);
 			return;
 		}
-		const replyEmbed = new Discord.MessageEmbed()
-			.setTitle('Requesting mod help.')
-			.addFields({ name: 'Reason', value: reason });
+		const replyEmbed = new Discord.MessageEmbed().setTitle('Requesting mod help.').addFields({ name: 'Reason', value: reason });
 		message.react('✅');
 		await message.channel.send(replyEmbed);
 

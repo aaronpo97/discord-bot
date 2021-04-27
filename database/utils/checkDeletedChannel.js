@@ -1,5 +1,5 @@
 const ServerInfo = require('../schemas/ServerInfo');
-module.exports = async channel => {
+const checkDeletedChannel = async channel => {
 	const { id: channelID } = channel;
 	const { id: guildID } = channel.guild;
 
@@ -15,3 +15,5 @@ module.exports = async channel => {
 		await serverInfo.save();
 	} else return;
 };
+
+module.exports = checkDeletedChannel;

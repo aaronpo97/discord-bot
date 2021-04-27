@@ -1,13 +1,5 @@
 const Commando = require('discord.js-commando');
-const {
-	farToCel,
-	farToKel,
-	celToFar,
-	celToKel,
-	kelToCel,
-	validUnits,
-	checkIfUsesDegree,
-} = require('./utils/tempconvert');
+const { farToCel, farToKel, celToFar, celToKel, kelToCel, validUnits, checkIfUsesDegree } = require('./utils/tempconvert');
 
 module.exports = class TemperatureConvertCommand extends Commando.Command {
 	constructor(client) {
@@ -45,7 +37,7 @@ module.exports = class TemperatureConvertCommand extends Commando.Command {
 			return;
 		}
 		if (initialUnit === 'F' && convertedUnit === 'K') {
-			message.channel.send(`${initialTemp} ° F is ${farToKel(initialTemp).toFixed(2)} K`);
+			message.channel.send(`${initialTemp}° F is ${farToKel(initialTemp).toFixed(2)} K`);
 			return;
 		}
 		if (initialUnit === 'K' && convertedUnit === 'F') {
